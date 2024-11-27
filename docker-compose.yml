@@ -5,6 +5,8 @@ services:
     image: chirpstack/chirpstack:4
     command: -c /etc/chirpstack
     restart: unless-stopped
+    networks:
+      - dokploy-network
     volumes:
       - ./configuration/chirpstack:/etc/chirpstack
       - ../files/lorawan-devices:/opt/lorawan-devices
@@ -22,6 +24,8 @@ services:
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:4
     restart: unless-stopped
+    networks:
+      - dokploy-network
     ports:
       - 1700:1700/udp
     volumes:
@@ -36,6 +40,8 @@ services:
   chirpstack-gateway-bridge-basicstation:
     image: chirpstack/chirpstack-gateway-bridge:4
     restart: unless-stopped
+    networks:
+      - dokploy-network
     command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-eu868.toml
     ports:
       - 3001:3001
@@ -48,6 +54,8 @@ services:
     image: chirpstack/chirpstack-rest-api:4
     restart: unless-stopped
     command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
+    networks:
+      - dokploy-network
     ports:
       - 8090:8090
     depends_on:
@@ -56,6 +64,8 @@ services:
   postgres:
     image: postgres:14-alpine
     restart: unless-stopped
+    networks:
+      - dokploy-network
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
       - ../files/postgresqldata:/var/lib/postgresql/data
@@ -64,6 +74,8 @@ services:
 
   redis:
     image: redis:7-alpine
+    networks:
+      - dokploy-network
     restart: unless-stopped
     command: redis-server --save 300 1 --save 60 100 --appendonly no
     volumes:
@@ -72,6 +84,8 @@ services:
   mosquitto:
     image: eclipse-mosquitto:2
     restart: unless-stopped
+    networks:
+      - dokploy-network
     ports:
       - 1883:1883
     volumes:
