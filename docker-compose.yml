@@ -6,7 +6,7 @@ services:
     command: -c /etc/chirpstack
     restart: unless-stopped
     volumes:
-      - ../files/configuration/chirpstack:/etc/chirpstack
+      - ./configuration/chirpstack:/etc/chirpstack
       - ../files/lorawan-devices:/opt/lorawan-devices
     depends_on:
       - postgres
@@ -25,7 +25,7 @@ services:
     ports:
       - 1700:1700/udp
     volumes:
-      - ../files/configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
     environment:
       - INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE=eu868/gateway/{{ .GatewayID }}/event/{{ .EventType }}
       - INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE=eu868/gateway/{{ .GatewayID }}/state/{{ .StateType }}
@@ -40,7 +40,7 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - ../files/configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
     depends_on:
       - mosquitto
 
@@ -75,4 +75,4 @@ services:
     ports:
       - 1883:1883
     volumes:
-      - ../files/configuration/mosquitto/config/:/mosquitto/config/
+      - ./configuration/mosquitto/config/:/mosquitto/config/
