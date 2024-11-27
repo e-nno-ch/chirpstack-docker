@@ -57,7 +57,7 @@ services:
     image: postgres:14-alpine
     restart: unless-stopped
     volumes:
-      - ../files/configuration/postgresql/initdb:/docker-entrypoint-initdb.d
+      - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
       - ../files/postgresqldata:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=root
