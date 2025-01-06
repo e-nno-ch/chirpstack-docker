@@ -25,7 +25,7 @@
     [regions.gateway.backend]
 
       # The enabled backend type.
-      enabled=["kafka"]
+      enabled="kafka"
 
       # MQTT configuration.
       # [regions.gateway.backend.mqtt]
