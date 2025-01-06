@@ -114,7 +114,7 @@ brokers=[
 # TLS.
 #
 # Set this to true when the Kafka client must connect using TLS to the Broker.
-tls=false
+tls=true
 
 # Topic for events.
 topic="prod.avro.chirpstack.measurements"
@@ -139,7 +139,7 @@ password="$KAFKA_BROKER_PASSWORD"
 # * PLAIN
 # * SCRAM-SHA-256
 # * SCRAM-SHA-512
-mechanism="PLAIN"
+mechanism="SCRAM-SHA-512"
 
 # Use JSON encoding instead of Protobuf (binary).
 json=true
