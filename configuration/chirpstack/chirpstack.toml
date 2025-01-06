@@ -97,7 +97,7 @@ secret = "you-must-replace-this"
 
 
 [integration]
-enabled = ["kafka"]
+enabled = ["mqtt", "kafka"]
 
 [integration.mqtt]
 server = "tcp://$MQTT_BROKER_HOST:1883/"
