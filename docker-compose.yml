@@ -12,10 +12,10 @@ services:
       - ../files/lorawan-devices:/opt/lorawan-devices
     depends_on:
       - postgres
-      - mosquitto
+      # - mosquitto
       - redis
     environment:
-      - MQTT_BROKER_HOST=mosquitto
+      # - MQTT_BROKER_HOST=mosquitto
       - REDIS_HOST=redis
       - POSTGRESQL_HOST=postgres
       - KAFKA_BROKER_HOST=$KAFKA_BROKER_HOST
