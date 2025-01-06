@@ -106,40 +106,40 @@ json = true
 # Kafka integration configuration.
 [integration.kafka]
 
-  # Brokers.
-  brokers=[
-    "$KAFKA_BROKER_HOST:$KAFKA_BROKER_PORT",
-  ]
+# Brokers.
+brokers=[
+  "$KAFKA_BROKER_HOST:$KAFKA_BROKER_PORT",
+]
 
-  # TLS.
-  #
-  # Set this to true when the Kafka client must connect using TLS to the Broker.
-  tls=false
+# TLS.
+#
+# Set this to true when the Kafka client must connect using TLS to the Broker.
+tls=false
 
-  # Topic for events.
-  topic="prod.avro.chirpstack.measurements"
+# Topic for events.
+topic="prod.avro.chirpstack.measurements"
 
-  # Template for keys included in Kafka messages.
-  # Kafka uses the key for distributing messages over partitions. You can use
-  # this to ensure some subset of messages end up in the same partition, so
-  # they can be consumed in-order. And Kafka can use the key for data retention
-  # decisions.  A header "event" with the event type is included in each
-  # message. There is no need to parse it from the key.
-  event_key="application.{{application_id}}.device.{{dev_eui}}.event.{{event}}"
+# Template for keys included in Kafka messages.
+# Kafka uses the key for distributing messages over partitions. You can use
+# this to ensure some subset of messages end up in the same partition, so
+# they can be consumed in-order. And Kafka can use the key for data retention
+# decisions.  A header "event" with the event type is included in each
+# message. There is no need to parse it from the key.
+event_key="application.{{application_id}}.device.{{dev_eui}}.event.{{event}}"
 
-  # Username (optional).
-  username="$KAFKA_BROKER_USERNAME"
+# Username (optional).
+username="$KAFKA_BROKER_USERNAME"
 
-  # Password.
-  password="$KAFKA_BROKER_PASSWORD"
+# Password.
+password="$KAFKA_BROKER_PASSWORD"
 
-  # Mechanism.
-  #
-  # Valid options are:
-  # * PLAIN
-  # * SCRAM-SHA-256
-  # * SCRAM-SHA-512
-  mechanism="PLAIN"
+# Mechanism.
+#
+# Valid options are:
+# * PLAIN
+# * SCRAM-SHA-256
+# * SCRAM-SHA-512
+mechanism="PLAIN"
 
-  # Use JSON encoding instead of Protobuf (binary).
-  json=true
+# Use JSON encoding instead of Protobuf (binary).
+json=true
