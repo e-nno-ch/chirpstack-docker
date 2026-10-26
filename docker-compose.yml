@@ -1,10 +1,17 @@
-version: "3"
+version: "3.4"
+
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "50m"
+    max-file: "3"
 
 services:
   chirpstack:
     image: chirpstack/chirpstack:4
     command: -c /etc/chirpstack
     restart: unless-stopped
+    logging: *default-logging
     networks:
       - dokploy-network
     volumes:
@@ -25,6 +32,7 @@ services:
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:4
     restart: unless-stopped
+    logging: *default-logging
     networks:
       - dokploy-network
     ports:
@@ -41,6 +49,7 @@ services:
   chirpstack-gateway-bridge-basicstation:
     image: chirpstack/chirpstack-gateway-bridge:4
     restart: unless-stopped
+    logging: *default-logging
     networks:
       - dokploy-network
     command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-eu868.toml
@@ -54,6 +63,7 @@ services:
   chirpstack-rest-api:
     image: chirpstack/chirpstack-rest-api:4
     restart: unless-stopped
+    logging: *default-logging
     command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
     networks:
       - dokploy-network
@@ -65,6 +75,7 @@ services:
   postgres:
     image: postgres:14-alpine
     restart: unless-stopped
+    logging: *default-logging
     networks:
       - dokploy-network
     volumes:
@@ -78,6 +89,7 @@ services:
     networks:
       - dokploy-network
     restart: unless-stopped
+    logging: *default-logging
     command: redis-server --save 300 1 --save 60 100 --appendonly no
     volumes:
       - ../files/redisdata:/data
@@ -85,6 +97,7 @@ services:
   mosquitto:
     image: eclipse-mosquitto:2
     restart: unless-stopped
+    logging: *default-logging
     networks:
       - dokploy-network
     ports:
